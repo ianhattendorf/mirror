@@ -1,4 +1,4 @@
-name: CI
+name: Mirror repos
 
 on:
   workflow_dispatch:
