@@ -1,0 +1,19 @@
+name: CI
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '52 2 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Mirror repos
+        run: |
+          git clone --bare https://git.sr.ht/~ianhattendorf/dotfiles
+          cd dotfiles.git
+          git push --mirror https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/ianhattendorf/dotfiles.git
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
